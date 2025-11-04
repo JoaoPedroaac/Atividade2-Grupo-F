@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  mysql-primary:
+    image: mysql:8.0
+    container_name: mysql-primary
+    environment:
+      MYSQL_ROOT_PASSWORD: grupof.pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./primary/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./primary/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  mysql-replica:
+    image: mysql:8.0
+    container_name: mysql-replica
+    environment:
+      MYSQL_ROOT_PASSWORD: grupof.pass
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./replica/my.cnf:/etc/mysql/conf.d/my.cnf
+      
